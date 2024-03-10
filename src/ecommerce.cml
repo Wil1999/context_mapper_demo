@@ -1,0 +1,56 @@
+// Definir el contexto principal para el sistema de ecommerce
+ContextMap EcommercePrueba{
+    // Definicion de Bounded Context    
+    contains SecurityManagementContext
+    contains CustomerManagementContext
+    contains PaymentManagementContext
+    contains ProductCatalogManagementContext
+    contains ShippingManagementContext
+    contains OrderManagementContext
+    contains InventoryManagementContext
+
+    // Relaciones entre Bounded context
+    //GestionOrdenesContext [P] <-> [P] GestionClientesContext
+    //GestionClientesContext [U,OHS] -> [D] GestionEnviosContext
+    SecurityManagementContext [U,OHS] -> [D,ACL] CustomerManagementContext
+    SecurityManagementContext [U,OHS,PL] -> [D,ACL] CustomerManagementContext
+
+    ProductCatalogManagementContext [D,C]<-[U,S] CustomerManagementContext
+
+    ProductCatalogManagementContext [P] <-> [P] OrderManagementContext
+
+    OrderManagementContext [D,C]<-[U,S] PaymentManagementContext
+
+    ProductCatalogManagementContext [SK]<->[SK] InventoryManagementContext {
+       implementationTechnology = "Libreria para Inventario"
+    }
+
+    OrderManagementContext [D,C]<-[U,S] ShippingManagementContext
+
+    ShippingManagementContext [U,OHS,PL] -> [D,CF] InventoryManagementContext
+
+}
+
+
+
+BoundedContext SecurityManagementContext{
+
+}
+BoundedContext CustomerManagementContext{
+
+}
+BoundedContext PaymentManagementContext{
+
+}
+BoundedContext ProductCatalogManagementContext{
+
+}
+BoundedContext ShippingManagementContext{
+
+}
+BoundedContext OrderManagementContext{
+
+}
+BoundedContext InventoryManagementContext{
+
+}

@@ -1,0 +1,37 @@
+// Definir el contexto principal para el sistema de ecommerce
+ContextMap EcommercePrueba{
+    // Definicion de Bounded Context    
+    contains MANAGEMENT_USER
+    contains MANAGEMENT_MUSIC_LIBRARY
+    contains MANAGEMENT_MUSIC_PLAYER
+    contains MANAGEMENT_PAY
+    contains MANAGEMENT_SECURITY
+
+    // Relaciones entre Bounded context
+    MANAGEMENT_SECURITY [U,OHS] -> [D,ACL] MANAGEMENT_USER
+    MANAGEMENT_SECURITY [U,OHS,PL] -> [D,ACL] MANAGEMENT_USER
+    MANAGEMENT_MUSIC_LIBRARY [D,C]<-[U,S] MANAGEMENT_USER
+    MANAGEMENT_MUSIC_PLAYER [D,C]<-[U,S] MANAGEMENT_PAY
+    MANAGEMENT_MUSIC_LIBRARY [P] <-> [P] MANAGEMENT_MUSIC_PLAYER
+
+}
+
+BoundedContext MANAGEMENT_USER{
+
+}
+
+BoundedContext MANAGEMENT_MUSIC_LIBRARY{
+
+}
+
+BoundedContext MANAGEMENT_MUSIC_PLAYER{
+
+}
+
+BoundedContext MANAGEMENT_PAY{
+
+}
+
+BoundedContext MANAGEMENT_SECURITY{
+
+}
